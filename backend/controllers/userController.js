@@ -1,5 +1,5 @@
 import { UserModel } from "../models/User.js";
-
+import md5 from 'md5'
 export const userController = {
   //GET USER
   getAllUser: async (req, res) => {
@@ -11,19 +11,20 @@ export const userController = {
       console.log(error);
     }
   },
+  
   //ADD USER
-  createUser: async (req, res) => {
-    try {
-      const user = new UserModel({
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email,
-        phone: req.body.phone,
-        address: req.body.address,
-      });
-      user.save();
-    } catch (error) {
-      console.log(error);
-    }
-  },
+  // createUser: async (req, res) => {
+  //   try {
+  //     const user = new UserModel({
+  //       username: req.body.username,
+  //       password: md5(req.body.password),
+  //       email: req.body.email,
+  //       phone: req.body.phone,
+  //       address: req.body.address,
+  //     });
+  //     user.save();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // },
 };

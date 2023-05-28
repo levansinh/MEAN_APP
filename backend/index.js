@@ -7,12 +7,16 @@ import bodyParser from "body-parser";
 import user from "./routes/user.js";
 import project from "./routes/project.js";
 import task from "./routes/task.js";
+import auth from "./routes/auth.js";
+import * as dotenv from 'dotenv' 
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.json({ limit: "30mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "30mb" }));
+
+const PORT = process.env.PORT || 5000;
+dotenv.config()
 
 // app.use(cors());
 const corsOptions ={
@@ -20,15 +24,13 @@ const corsOptions ={
   credentials:true,           
   optionSuccessStatus:200
 }
+
 app.use(cors(corsOptions));
 
 app.use("/user", user);
 app.use("/project", project);
 app.use("/task", task);
-
-
-
-
+app.use("/auth", auth);
 
 async function connect() {
   try {

@@ -12,11 +12,13 @@ import { HeaderComponent } from './layouts/components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProjectComponent } from './pages/project/project.component';
+import { SignupComponent } from './pages/signup/signup.component';
 
 
 const routes:Routes =[
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'signup', component: SignupComponent},
   {path: 'project', component: ProjectComponent},
 ]
 
@@ -27,7 +29,8 @@ const routes:Routes =[
     LoginComponent,
     DefaultLayoutComponent,
     HeaderComponent,
-    ProjectComponent
+    ProjectComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

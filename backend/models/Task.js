@@ -10,6 +10,9 @@ const schema = new Schema(
         assigned_to: { type: String,required:"true" },
         priority: {type: String,default:'Staff'},
         status: { type: String,required:"true" },
+        },
+        {
+            timestamps:true
         }
 );
 
