@@ -1,33 +1,3 @@
-<!-- <form action="" (ngSubmit)="onSubmit()" #loginForm="ngForm">
-  <h1 class="font-bold text-2xl text-center my-5">Login member</h1>
-  <div class="bg-white shadow-md w-1/2 mx-auto my-5  rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
-    <div class="mb-4">
-      <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
-        Username
-      </label>
-      <input ngModel class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" name="username" id="username" type="text" placeholder="Username" #username="ngModel">
-      <p *ngIf="!username?.valid && (username?.dirty || username?.touched)" class="text-red text-xs italic text-red-600">Please choose a username.</p>
-    </div>
-    <div class="mb-6">
-      <label class="block text-grey-darker text-sm font-bold mb-2" for="password">
-        Password
-      </label>
-      <input ngModel class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3" name="password" id="password" type="password" placeholder="******************" #password="ngModel">
-      <p *ngIf="!password?.valid && (password?.dirty || password?.touched)" class="text-red text-xs italic text-red-600">Please choose a password.</p>
-    </div>
-    <div class="flex items-center justify-between">
-      <button class="bg-blue-500 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" type="submit">
-        Sign In
-      </button>
-      <a class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker" href="#">
-        Forgot Password?
-      </a>
-    </div>
-  </div>
-
-</form> -->
-
-
 <section class="bg-gray-50 dark:bg-gray-900">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -35,14 +5,14 @@
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Sign in to your account
               </h1>
-              <form class="space-y-4 md:space-y-6" action="#">
+              <form class="space-y-4 md:space-y-6" action="#" [formGroup]="loginForm">
                   <div>
-                      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                      <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
+                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your username</label>
+                      <input formControlName="username" type="username" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="namecompany" required="">
                   </div>
                   <div>
                       <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                      <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                      <input formControlName="password" type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
                   </div>
                   <div class="flex items-center justify-between">
                       <div class="flex items-start">
@@ -55,7 +25,7 @@
                       </div>
                       <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
                   </div>
-                  <button type="submit" class="w-full text-white bg-blue-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                  <button type="submit" (click)="onSubmit()" class="w-full text-white bg-blue-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
                   <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                       Don’t have an account yet? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500" routerLink="/signup">Sign up</a>
                   </p>

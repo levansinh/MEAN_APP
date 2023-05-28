@@ -9,12 +9,13 @@ import project from "./routes/project.js";
 import task from "./routes/task.js";
 import auth from "./routes/auth.js";
 import * as dotenv from 'dotenv' 
+import cookieParser from "cookie-parser";
 
 const app = express();
 
+app.use(cookieParser())
 app.use(bodyParser.json({ limit: "30mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "30mb" }));
-
 const PORT = process.env.PORT || 5000;
 dotenv.config()
 

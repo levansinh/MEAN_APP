@@ -2,13 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { User } from './../common/user';
-
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  URL: string ='http://localhost:5000/user';
+  URL: string ='http://localhost:5000';
 
   constructor(private httpClient: HttpClient) {}
   private httpOptions = {
@@ -18,9 +16,7 @@ export class UserService {
     })
   };
   getAllUser():Observable<any>{
-    return this.httpClient.get<any>(`${this.URL}`);
+    return this.httpClient.get<any>(`${this.URL}/user`);
   }
-  createUser(data: User) {
-    return this.httpClient.post(`${this.URL}`, data);
-  }
+
 }

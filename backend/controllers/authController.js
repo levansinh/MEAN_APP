@@ -3,10 +3,12 @@ import jwt from "jsonwebtoken";
 import md5 from "md5";
 
 export const authController = {
-     TOKEN : process.env.JSONWEBTOKEN_TOKEN,
+  TOKEN: process.env.JSONWEBTOKEN_TOKEN,
   //GET PROJECT
   registerUser: async (req, res, next) => {
     try {
+      const tk = req.cookies.token;
+      console.log(tk);
       const md5Password = md5(req.body.password);
       const newUser = await UserModel({
         username: req.body.username,
@@ -21,24 +23,24 @@ export const authController = {
       res.status(500).json(error);
     }
   },
-  
+
   loginUser: async (req, res, next) => {
     try {
-        const TOKEN = process.env.JSONWEBTOKEN_TOKEN
+      const TOKEN = process.env.JSONWEBTOKEN_TOKEN;
       const user = await UserModel.findOne({
         username: req.body.username,
         password: md5(req.body.password),
       });
-     
       if (user) {
         let token = jwt.sign(
           {
             _id: user._id,
           },
           TOKEN,
-          { expiresIn: "30s" }
+          { expiresIn: "2h" }
         );
-        return res.json({
+       
+       res.status(200).json({
           message: "success",
           token: token,
         });
@@ -47,5 +49,7 @@ export const authController = {
       res.status(500).json(error);
     }
   },
-  logoutUser: async (req, res, next) => {},
+  logoutUser: async (req, res, next) => {
+    res.status(200).json("logout Successful");
+  },
 };

@@ -4,6 +4,7 @@ export const userController = {
   //GET USER
   getAllUser: async (req, res) => {
     try {
+  
       const users = await UserModel.find();
       console.log(users);
       res.status(200).json(users);
@@ -11,6 +12,15 @@ export const userController = {
       console.log(error);
     }
   },
+  getOneuser:async (req,res) =>{
+    try {
+      const user = await UserModel.findOne(req.body._id);
+      console.log(user);
+      res.status(200).json(user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   
   //ADD USER
   // createUser: async (req, res) => {
