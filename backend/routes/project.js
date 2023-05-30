@@ -4,7 +4,10 @@ import { projectController } from '../controllers/projectController.js'
 
 const router = express.Router()
 
-router.get('/create',projectController.createProject)
-router.get('/',projectController.getAllProject)
+router.post('/edit/:id',projectController.update)
+router.post('/',projectController.create)
+
+router.get('/edit/:id',projectController.getOne)
+router.get('/',projectController.getAll)
 
 export default router

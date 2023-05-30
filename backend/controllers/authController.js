@@ -35,13 +35,15 @@ export const authController = {
         let token = jwt.sign(
           {
             _id: user._id,
+            isAdmin:user.role === 1 ? true : false
           },
           TOKEN,
           { expiresIn: "2h" }
         );
-       
+       res.cookie('token',token)
        res.status(200).json({
           message: "success",
+          user:user,
           token: token,
         });
       }

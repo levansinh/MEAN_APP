@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
     password: new FormControl(''),
   });
   constructor(
-    private cookieService: CookieService,
     private authService: AuthService,
     private router: Router
   ) {}
@@ -25,10 +24,9 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.controls.password.value;
     const newData = { username: username, password: password };
     this.authService.loginUser(newData).subscribe((data: any): void => {
-      console.log(data);
-
-      this.cookieService.set('token', data.token, { expires: 1 });
-      this.router.navigate(['/']);
+      setTimeout(()=>{
+        this.router.navigate(['/']);
+      },3000)
     });
   }
   ngOnInit(): void {}

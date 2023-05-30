@@ -10,11 +10,18 @@ export class ProjectService {
   URL: string = 'http://localhost:5000/project';
   constructor(private httpClient: HttpClient) {}
 
+  getAllProject():Observable<any>{
+    return this.httpClient.get(`${this.URL}`);
+  }
+  getOneProject(id:any):Observable<any>{
+    return this.httpClient.get(`${this.URL}/edit/${id}`);
+  }
   addProject(data: Project):Observable<any> {
     let API_URL = `${this.URL}/create`;
-    return this.httpClient.post(API_URL, data);
+    return this.httpClient.post(this.URL, data);
   }
-  getAllProject():Observable<any>{
-    return this.httpClient.get(`${URL}`);
+  updateProject(id:string,data: Project):Observable<any> {
+    let API_URL = `${this.URL}/edit/${id}`;
+    return this.httpClient.post(this.URL, data);
   }
 }
