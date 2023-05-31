@@ -11,17 +11,17 @@ export class ProjectService {
   constructor(private httpClient: HttpClient) {}
 
   getAllProject():Observable<any>{
-    return this.httpClient.get(`${this.URL}`);
+    return this.httpClient.get(`${this.URL}`,{ withCredentials: true });
   }
-  getOneProject(id:any):Observable<any>{
-    return this.httpClient.get(`${this.URL}/edit/${id}`);
+  getOneProject(id:string):Observable<any>{
+    return this.httpClient.get(`${this.URL}/edit/${id}`,{ withCredentials: true });
   }
   addProject(data: Project):Observable<any> {
-    let API_URL = `${this.URL}/create`;
-    return this.httpClient.post(this.URL, data);
+    return this.httpClient.post(this.URL, data,{ withCredentials: true });
   }
-  updateProject(id:string,data: Project):Observable<any> {
+  updateProject(id:any,data: Project):Observable<any> {
     let API_URL = `${this.URL}/edit/${id}`;
-    return this.httpClient.post(this.URL, data);
+    return this.httpClient.put(API_URL, data,{ withCredentials: true });
   }
+
 }

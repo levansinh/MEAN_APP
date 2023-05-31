@@ -5,7 +5,6 @@ export const userController = {
   getAllUser: async (req, res) => {
     try {
       const users = await UserModel.find();
-      console.log(users);
       res.status(200).json(users);
     } catch (error) {
       console.log(error);
@@ -14,26 +13,19 @@ export const userController = {
   getOneUser: async (req, res) => {
     try {
       const user = await UserModel.findOne(req.body._id);
-      console.log(user);
       res.status(200).json(user);
     } catch (error) {
       console.log(error);
     }
   },
-  getAllLeader: async (req, res) => {
+  getWithRole: async (req, res) => {
     try {
-      const user = await UserModel.find(req.body.role);
-      console.log(user);
-      res.status(200).json(user);
-    } catch (error) {
-      console.log(error);
-    }
-  },
-  getAllStaff: async (req, res) => {
-    try {
-      const user = await UserModel.find(req.body.role);
-      console.log(user);
-      res.status(200).json(user);
+      const user = await UserModel.find({
+        role: req.params.role,
+      });
+      res.status(200).json({
+        data: user,
+      });
     } catch (error) {
       console.log(error);
     }

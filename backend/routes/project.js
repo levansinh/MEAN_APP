@@ -4,7 +4,8 @@ import { projectController } from '../controllers/projectController.js'
 
 const router = express.Router()
 
-router.post('/edit/:id',projectController.update)
+router.delete('/:id',projectController.delete)
+router.put('/edit/:id',projectController.update)
 router.post('/',projectController.create)
 
 router.get('/edit/:id',projectController.getOne)

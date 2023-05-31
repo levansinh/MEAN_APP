@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
-import { ProjectComponent } from './pages/project/project.component';
+import { ProjectComponent } from './pages/projects/project/project.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { CreateComponent } from './pages/projects/create/create.component';
 import { EditComponent } from './pages/projects/edit/edit.component';

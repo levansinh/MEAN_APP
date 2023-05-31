@@ -26,24 +26,26 @@ export const authController = {
 
   loginUser: async (req, res, next) => {
     try {
+     
       const TOKEN = process.env.JSONWEBTOKEN_TOKEN;
       const user = await UserModel.findOne({
         username: req.body.username,
         password: md5(req.body.password),
       });
       if (user) {
+        const { password, ...others } = user._doc;
         let token = jwt.sign(
           {
             _id: user._id,
-            isAdmin:user.role === 1 ? true : false
+            isAdmin: user.role === 1 ? true : false,
           },
           TOKEN,
           { expiresIn: "2h" }
         );
-       res.cookie('token',token)
-       res.status(200).json({
+        res.cookie('accessToken',token)
+        res.status(200).json({
           message: "success",
-          user:user,
+          user: others,
           token: token,
         });
       }
@@ -52,6 +54,7 @@ export const authController = {
     }
   },
   logoutUser: async (req, res, next) => {
+    res.clearCookie("token");
     res.status(200).json("logout Successful");
   },
 };

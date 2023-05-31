@@ -1,5 +1,5 @@
 import { ProjectModel } from "../models/Project.js";
-
+import jwt from "jsonwebtoken";
 export const projectController = {
   //GET PROJECT
   getAll: async (req, res) => {
@@ -10,45 +10,50 @@ export const projectController = {
         success: "success",
       });
     } catch (error) {
-      console.log(error);
+      res.status(500).json(error);
     }
   },
   getOne: async (req, res) => {
     try {
-      console.log(req.params.id);
       const project = await ProjectModel.findOne({ _id: req.params.id });
       res.status(200).json({
         data: project,
         success: "success",
       });
     } catch (error) {
-      console.log(error);
+      res.status(500).json(error);
     }
   },
+
   //ADD PROJECT
   create: async (req, res) => {
     try {
       const project = await new ProjectModel({
-        name_leader: req.body.nameLeader,
-        name_project: req.body.nameProject,
-        team_size: req.body.teamSize,
+        name_leader: req.body.name_leader,
+        name_project: req.body.name_project,
+        team_size: req.body.team_size,
       });
       const result = await project.save();
       res.status(200).json(result);
     } catch (error) {
-      console.log(error);
+      res.status(500).json(error);
     }
   },
   //UPDATE PROJECT
   update: async (req, res) => {
     try {
       const result = await ProjectModel.updateOne(
-        { _id: req.body.id },
-        req.body
+        { _id: req.params.id },
+        {
+          name_leader: req.body.name_leader,
+          name_project: req.body.name_project,
+          team_size: req.body.team_size,
+        }
       );
+
       res.status(200).json({ message: "success", data: result });
     } catch (error) {
-      console.log(error);
+      res.status(500).json(error);
     }
   },
   //DELETE PROJECT

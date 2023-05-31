@@ -4,6 +4,7 @@ export interface register {
   email: string | null;
   phone: string | null;
   address: string | null;
+
 }
 
 export interface login {

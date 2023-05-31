@@ -1,26 +1,51 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup } from '@angular/forms';
-
+import { FormControl, FormGroup } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css']
+  styleUrls: ['./edit.component.css'],
 })
-export class EditComponent implements OnInit{
-  data:any = []
-constructor(private projectService:ProjectService, private route: ActivatedRoute){
-
-}
+export class EditComponent implements OnInit {
+  leader: any = [];
+  data: any = {};
+  submitForm = new FormGroup({
+    nameProject: new FormControl(''),
+    teamSize: new FormControl(''),
+    nameLeader: new FormControl(''),
+  });
+  constructor(
+    private userService: UserService,
+    private projectService: ProjectService,
+    private router: ActivatedRoute,
+    private route: Router
+  ) {}
+  id = this.router.snapshot.params['id'];
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
-    this.projectService.getOneProject(id).subscribe(data =>{
-     this.data = data.data
-    })
+    this.projectService.getOneProject(this.id).subscribe((data) => {
+      this.data = data.data;
+    });
+    this.userService.getWithRole(1).subscribe((data) => {
+      this.leader = data.data;
+    });
   }
-  onSubmit(){
+  onSubmit() {
+    const nameProject = this.submitForm.controls.nameProject.value;
+    const teamSize = this.submitForm.controls.teamSize.value;
+    const nameLeader = this.submitForm.controls.nameLeader.value;
+    const newData = {
+      name_leader: nameLeader,
+      name_project: nameProject,
+      team_size: teamSize,
+    };
 
+    this.projectService.updateProject(this.id, newData).subscribe((data) => {
+      setTimeout(() => {
+        this.route.navigate(['/project']);
+      }, 2000);
+    });
   }
 }

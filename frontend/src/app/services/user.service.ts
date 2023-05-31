@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  URL: string ='http://localhost:5000';
+  URL: string ='http://localhost:5000/user';
 
   constructor(private httpClient: HttpClient) {}
   private httpOptions = {
@@ -16,7 +16,10 @@ export class UserService {
     })
   };
   getAllUser():Observable<any>{
-    return this.httpClient.get<any>(`${this.URL}/user`);
+    return this.httpClient.get<any>(`${this.URL}`,{ withCredentials: true });
+  }
+  getWithRole(role:number):Observable<any>{
+    return this.httpClient.get<any>(`${this.URL}/role/${role}`,{ withCredentials: true });
   }
 
 }

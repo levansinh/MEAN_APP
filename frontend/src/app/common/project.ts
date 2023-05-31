@@ -1,5 +1,5 @@
 export class Project  {
-  project_name!:string;
-  day_start!:string;
-  team_size!:string;
+  name_leader!:string | null;
+  name_project!:string | null;
+  team_size!:string | null;
 }

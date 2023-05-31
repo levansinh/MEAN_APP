@@ -16,12 +16,12 @@ private httpOptions = {
   })
 };
 registerUser(data: register):Observable<any> {
-  return this.httpClient.post(`${this.URL}/auth/register`, data);
+  return this.httpClient.post(`${this.URL}/auth/register`, data,{ withCredentials: true });
 }
 loginUser(data: login) {
-  return this.httpClient.post(`${this.URL}/auth/login`, data);
+  return this.httpClient.post(`${this.URL}/auth/login`, data,{ withCredentials: true });
 }
 logoutUser(){
-  return this.httpClient.get(`${this.URL}/auth/logout`)
+  return this.httpClient.get(`${this.URL}/auth/logout`,{ withCredentials: true })
 }
 }
