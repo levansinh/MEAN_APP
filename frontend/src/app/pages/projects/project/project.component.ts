@@ -1,22 +1,27 @@
-import { Component ,OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
-  styleUrls: ['./project.component.css']
+  styleUrls: ['./project.component.css'],
 })
 export class ProjectComponent implements OnInit {
-  data:any = []
-  constructor(private projectService:ProjectService){
-
-  }
+  data: any = [];
+  constructor(private projectService: ProjectService) {}
   ngOnInit(): void {
-   this.projectService.getAllProject().subscribe(data=>{
-    console.log(data);
-    this.data= data.data
-   })
+    this.projectService.getAllProject().subscribe((data) => {
+      console.log(data);
+      this.data = data.data;
+    });
   }
+  handleDelete(id: string) {
+    if (confirm('Bạn có muốn xóa ???')) {
+      this.projectService.deleteProject(id).subscribe((data) => {
+        this.ngOnInit();
 
+      });
+    }
+  }
 }

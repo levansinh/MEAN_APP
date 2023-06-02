@@ -50,7 +50,6 @@ export const projectController = {
           team_size: req.body.team_size,
         }
       );
-
       res.status(200).json({ message: "success", data: result });
     } catch (error) {
       res.status(500).json(error);
@@ -58,6 +57,21 @@ export const projectController = {
   },
   //DELETE PROJECT
   delete: async (req, res) => {
-    ProjectModel.deleteOne({ _id: req.body.id });
+    ProjectModel.findByIdAndRemove(req.params.id)
+    .then(data=>{
+      if(data){
+        res.status(200).json({
+          message: 'Project deleted successfully',
+          data:data
+        });
+      }else{
+        res.status(403).json({
+          message: 'Project deleted failed',
+        });
+      }
+    })
+    .catch((err)=>{
+      res.status(500).json(err)
+    })
   },
 };

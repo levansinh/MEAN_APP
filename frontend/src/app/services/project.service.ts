@@ -23,5 +23,9 @@ export class ProjectService {
     let API_URL = `${this.URL}/edit/${id}`;
     return this.httpClient.put(API_URL, data,{ withCredentials: true });
   }
+  deleteProject(id:any):Observable<any> {
+    let API_URL = `${this.URL}/${id}`;
+    return this.httpClient.delete(API_URL,{ withCredentials: true });
+  }
 
 }

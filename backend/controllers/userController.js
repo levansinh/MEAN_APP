@@ -1,5 +1,5 @@
 import { UserModel } from "../models/User.js";
-import md5 from "md5";
+
 export const userController = {
   //GET USER
   getAllUser: async (req, res) => {
@@ -29,5 +29,23 @@ export const userController = {
     } catch (error) {
       console.log(error);
     }
+  },
+  deleteUser: async (req, res) => {
+    UserModel.findByIdAndRemove(req.params.id)
+    .then(data=>{
+      if(data){
+        res.status(200).json({
+          message: 'Project deleted successfully',
+          data:data
+        });
+      }else{
+        res.status(403).json({
+          message: 'Project deleted failed',
+        });
+      }
+    })
+    .catch((err)=>{
+      res.status(500).json(err)
+    })
   },
 };

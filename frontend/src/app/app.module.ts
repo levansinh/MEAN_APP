@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 
 
 import { AppComponent } from './app.component';
@@ -36,8 +41,14 @@ import { EditComponent } from './pages/projects/edit/edit.component';
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    provideAnimations(), // required animations providers
+    provideToastr(), // Toastr providers
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

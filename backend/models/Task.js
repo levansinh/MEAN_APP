@@ -8,8 +8,8 @@ const schema = new Schema(
         task_name: { type: String ,required:"true"},
         description: { type: String,required:"true" },
         assigned_to: { type: String,required:"true" },
-        priority: {type: String,default:'Staff'},
-        status: { type: String,required:"true" },
+        priority: {type: String,default:'normal'},
+        status: { type: String,default:"hoding" },
         },
         {
             timestamps:true
