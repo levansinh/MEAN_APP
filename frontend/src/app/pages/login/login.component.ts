@@ -10,11 +10,16 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  responseData: any = [];
   loginForm = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
   });
-  constructor(private authService: AuthService, private router: Router,private toasrt:ToastrService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toasrt: ToastrService
+  ) {}
 
   onSubmit() {
     const username = this.loginForm.controls.username.value;
@@ -23,10 +28,13 @@ export class LoginComponent implements OnInit {
 
     this.authService.loginUser(newData).subscribe((data: any): void => {
       console.log(data);
-      setTimeout(() => {
+      if (data != null) {
+        this.responseData = data;
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userCurrent',JSON.stringify(data.user))
         this.router.navigate(['/']);
-        this.toasrt.success('Hello world!', 'Toastr fun!');
-      }, 1000);
+        this.toasrt.success('Login success', 'Success!');
+      }
     });
   }
   ngOnInit(): void {}

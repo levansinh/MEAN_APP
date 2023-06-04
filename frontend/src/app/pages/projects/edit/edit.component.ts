@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { ProjectService } from 'src/app/services/project.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -21,7 +21,8 @@ export class EditComponent implements OnInit {
     private userService: UserService,
     private projectService: ProjectService,
     private router: ActivatedRoute,
-    private route: Router
+    private route: Router,
+    private toastr:ToastrService
   ) {}
   id = this.router.snapshot.params['id'];
   ngOnInit(): void {
@@ -43,9 +44,8 @@ export class EditComponent implements OnInit {
     };
 
     this.projectService.updateProject(this.id, newData).subscribe((data) => {
-      setTimeout(() => {
-        this.route.navigate(['/project']);
-      }, 2000);
+      this.route.navigate(['/project']);
+      this.toastr.success('Project updated successfully')
     });
   }
 }

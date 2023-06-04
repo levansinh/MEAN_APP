@@ -1,43 +1,51 @@
-
-<div class="relative overflow-x-auto sm:rounded-lg">
-  <table class="w-2/3 m-auto text-sm text-left text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-              <th scope="col" class="px-6 py-3">
-                  Project name
-              </th>
-              <th scope="col" class="px-6 py-3">
-                  Name leader
-              </th>
-              <th scope="col" class="px-6 py-3">
-                  Team size
-              </th>
-              <th scope="col" class="px-6 py-3">
-                 <button class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"><a href="" routerLink="/project/create">Create Project</a></button>
-              </th>
-              <th scope="col" class="px-6 py-3">
-                  <span class="sr-only">delete</span>
-              </th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let item of data" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {{item.name_project}}
-              </th>
-              <td class="px-6 py-4">
-                {{item.name_leader}}
-              </td>
-              <td class="px-6 py-4">
-                {{item.team_size}}
-              </td>
-              <td class="px-6 py-4 text-right">
-                  <a href="#" routerLink="/project/edit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" [routerLink]="['/project/edit/'+ item._id]">Edit</a>
-              </td>
-              <td class="px-6 py-4 text-right">
-                  <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline"(click)="handleDelete(item._id)" >Delete </a>
-              </td>
-          </tr>
-      </tbody>
-  </table>
+<div class="flex items-cemter py-7 px-10 justify-between">
+  <div class="">
+    <h1 class="text-2xl text-gray-800 font-semibold">Project</h1>
+    <p class="text-sm font-medium text-gray-500 ">Create your project grow and upload here</p>
+  </div>
+  <button routerLink="/project/create" class="inline-flex gap-x-2 items-center px-6 py-2.5 rounded-xl bg-indigo-600 text-white">
+    <fa-icon class="w-6 h-6 fill-current" [icon]="plusIcon"></fa-icon>
+    <span class="text-sm tracking-wide">Create Project</span>
+  </button>
 </div>
+
+<table class="w-full border-b border-gray-200">
+  <thead>
+    <tr class="text-sm font-medium text-gray-700 border-b border-gray-200">
+      <td class="py-4 px-4 text-center">Project Name</td>
+      <td class="py-4 px-4 text-center">Leader Name</td>
+      <td class="py-4 px-4 text-center">Team Size</td>
+      <td class="py-4 px-4 text-center">Day Start</td>
+      <td class="py-4 pr-10 pl-4 text-center">
+
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+     *ngFor="let project of data"
+      class="hover:bg-gray-100 transition-colors group"
+    >
+      <td class="font-medium text-center">{{ project.name_project }}</td>
+      <td class="font-medium text-center">{{ project.name_leader }}</td>
+      <td class="text-center">
+        <span class="font-medium">{{ project.team_size }}</span>
+        <span class="ml-3 text-gray-400">Member</span>
+      </td>
+      <td class="font-medium text-center">
+
+        {{convertToDay(project.day_start)}}
+      </td>
+      <td>
+        <button (click)="handleDelete(project._id)">
+          <fa-icon class="h-6 w-6 text-red-600" [icon]="faTrash"></fa-icon>
+        </button>
+        <button class="ml-5">
+          <a href="" [routerLink]="['/project/edit/'+ project._id]"> <fa-icon class="h-6 w-6 text-green-600" [icon]="faEdit"></fa-icon> </a>
+
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+

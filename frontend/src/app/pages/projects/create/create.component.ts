@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -20,7 +20,8 @@ export class CreateComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private route: Router,
-    private userService: UserService
+    private userService: UserService,
+    private toastr :ToastrService
   ) {}
   ngOnInit(): void {
     this.userService.getWithRole(1).subscribe((data) => {
@@ -40,7 +41,7 @@ export class CreateComponent implements OnInit {
 
     this.projectService.addProject(newData).subscribe((data) => {
       this.route.navigate(['/project']);
-      console.log(data);
+      this.toastr.success(`Project added successfully`)
     });
   }
 }

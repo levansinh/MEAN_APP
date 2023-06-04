@@ -21,5 +21,8 @@ export class UserService {
   getWithRole(role:number):Observable<any>{
     return this.httpClient.get<any>(`${this.URL}/role/${role}`,{ withCredentials: true });
   }
-
+  deleteUser(id:any):Observable<any> {
+    let API_URL = `${this.URL}/${id}`;
+    return this.httpClient.delete(API_URL,{ withCredentials: true });
+  }
 }

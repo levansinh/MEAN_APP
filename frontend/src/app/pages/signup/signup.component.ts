@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
-
   ngOnInit(): void {}
   registerForm = new FormGroup({
     username: new FormControl(''),
@@ -17,7 +17,11 @@ export class SignupComponent implements OnInit {
     phone: new FormControl(''),
     address: new FormControl(''),
   });
-  constructor(private authService: AuthService,private router:Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   onSubmit() {
     const username = this.registerForm.controls.username.value;
@@ -34,8 +38,8 @@ export class SignupComponent implements OnInit {
     };
 
     this.authService.registerUser(newData).subscribe((data) => {
-      console.log(data);
-this.router.navigate(['/login'])
+      this.toastr.success("Account you registered successfully")
+      this.router.navigate(['/login']);
     });
   }
 }

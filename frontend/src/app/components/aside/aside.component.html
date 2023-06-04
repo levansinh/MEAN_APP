@@ -1,0 +1,15 @@
+
+  <aside class="py-6 pr-10 w-64 border-r border-gray-200 overflow-auto h-[100vh]">
+    <img src="" alt="" class="w-28"/>
+    <ul *ngFor="let group of sidebar" class="flex flex-col gap-y-6 pt-20">
+      <li *ngFor="let item of group">
+        <a class="flex py-2 gap-x-4 items-start text-gray-500 hover:text-indigo-600 group" routerLink="{{ item.path }}"
+          >
+          <span class="w-1.5 h-8 rounder-r-full left-0 scale-y-0 bg-indigo-600 -translate-x-full group-hover:scale-y-100 group-hover:translate-x-0"></span>
+          <span><fa-icon class="fill-current w-6 h-6" [icon]="item.icon"></fa-icon> </span>
+          <span> {{ item.name }}</span></a
+        >
+      </li>
+    </ul>
+  </aside>
+
